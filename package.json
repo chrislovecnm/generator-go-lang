@@ -1,0 +1,70 @@
+{
+  "name": "generator-go-lang",
+  "version": "1.0.1",
+  "description": "A teeny tiny, somewhat opinionated, Yeoman generator for #golang projects.",
+  "homepage": "https://github.com/axelspringer/generator-go-lang",
+  "bugs": {
+    "url": "https://github.com/axelspringer/generator-go-lang/issues"
+  },
+  "author": {
+    "name": "Axel Springer SE",
+    "url": "http://http://www.axelspringer.de/"
+  },
+  "contributors": [
+    {
+      "name": "Sebastian Döll",
+      "email": "sebastian@katallaxie.me"
+    }
+  ],
+  "files": [
+    "app",
+    "templates"
+  ],
+  "main": "app/index",
+  "keywords": [
+    "yeoman-generator",
+    "generator",
+    "golang",
+    "go"
+  ],
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "colors": "^1.1.2",
+    "rimraf": "^2.5.4",
+    "yeoman-generator": "^2.0.0",
+    "yosay": "^2.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-eslint": "^8.0.0",
+    "babel-jest": "^21.0.2",
+    "babel-plugin-transform-async-to-generator": "^6.16.0",
+    "babel-preset-env": "^1.1.4",
+    "babel-preset-node": "^5.1.1",
+    "del": "^3.0.0",
+    "eslint": "^4.6.1",
+    "jest": "^21.0.2",
+    "jest-cli": "^21.0.2",
+    "yeoman-test": "^1.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/axelspringer/generator-go-lang.git"
+  },
+  "scripts": {
+    "babel": "babel",
+    "build": "babel src -d app",
+    "watch": "babel --watch src -d app",
+    "prepublish": "npm run build",
+    "test": "eslint 'src/**/*.js' && jest",
+    "update": "git pull --recurse-submodules"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "engines": {
+    "node": ">=6.9.1",
+    "npm": ">=3"
+  },
+  "license": "MIT"
+}
