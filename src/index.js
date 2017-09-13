@@ -84,6 +84,9 @@ class GolangGenerator extends Generator {
         this
       );
     });
+
+    // setup project
+    this.spawnCommandSync("dep", ["init"], {cwd: this.destinationRoot()})
   }
 
 }
