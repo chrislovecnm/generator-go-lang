@@ -4,7 +4,7 @@
 
 # <%= appName %>
 
-A golang app created with `yo golang`.
+A golang app created with `yo go-lang`.
 
 ## Getting Started
 
