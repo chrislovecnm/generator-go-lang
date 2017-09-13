@@ -20,6 +20,10 @@ export default [
     to: 'main.go'
   },
   {
+    from: '_version.go',
+    to: 'version.go'
+  },
+  {
     from: '_CONTRIBUTORS.md',
     to: 'CONTRIBUTORS.md'
   },
