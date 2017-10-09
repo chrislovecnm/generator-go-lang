@@ -25,7 +25,7 @@ npm i -g generator-go-lang
 Create your project in the `$GOPATH`.
 
 ```
-mkdir $GOPATH/your-new_app && cd $_
+mkdir $GOPATH/src/<username>/your-new_app && cd $_
 ```
 
 Have fun.
