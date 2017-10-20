@@ -47,23 +47,18 @@ class GolangGenerator extends Generator {
 
     const cb = this.async();
 
+    console.log(this.appName);
+
     const prompts = [{
       type: 'input',
       name: 'app',
       message: `What is the name of your new app?`,
       default: this.appName,
       store: true,
-    }, {
-      type: 'input',
-      name: 'repoUrl',
-      message: `What is the URL of your app repo?`,
-      default: `github.com/me/myapp`,
-      store: true
     }];
 
-    return this.prompt(prompts).then(({app, repoUrl}) => {
+    return this.prompt(prompts).then(({app}) => {
       this.appName = app;
-      this.repoUrl = repoUrl;
       cb();
     })
   }
