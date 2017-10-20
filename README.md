@@ -11,6 +11,8 @@
 
 > We highly recommand to use `nvm` ([NVM](https://github.com/creationix/nvm)) to manage your Node versions, and to use the most recent versions
 
+> if you have [dep](https://github.com/golang/dep) for Go package management installed, the generator provides you with an option for that to initialize
+
 First, you have to install `yo`, as to use any [Yeoman](http://yeoman.io/) Generator. 
 
 ```
