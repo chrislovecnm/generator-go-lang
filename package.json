@@ -1,6 +1,6 @@
 {
   "name": "generator-go-lang",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A teeny tiny, somewhat opinionated, generator for golang projects",
   "homepage": "https://github.com/axelspringer/generator-go-lang",
   "bugs": {
