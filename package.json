@@ -28,7 +28,7 @@
     "go"
   ],
   "dependencies": {
-    "chalk": "^2.1.0",
+    "chalk": "^2.2.0",
     "colors": "^1.1.2",
     "rimraf": "^2.5.4",
     "yeoman-generator": "^2.0.0",

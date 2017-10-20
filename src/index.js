@@ -1,10 +1,12 @@
 import yosay from 'yosay';
 import proc from 'process';
 import path from 'path';
+import chalk from 'chalk';
 import Generator from 'yeoman-generator';
+import { spawnDep } from './helpers';
 
 // load configs
-import templates from './templates'
+import templates from './templates';
 
 // generator
 class GolangGenerator extends Generator {
@@ -47,8 +49,6 @@ class GolangGenerator extends Generator {
 
     const cb = this.async();
 
-    console.log(this.appName);
-
     const prompts = [{
       type: 'input',
       name: 'app',
@@ -57,8 +57,19 @@ class GolangGenerator extends Generator {
       store: true,
     }];
 
-    return this.prompt(prompts).then(({app}) => {
+    if (spawnDep(["--help"])) {
+      prompts.push({
+        type: 'confirm',
+        name: 'goPkg',
+        message: `What you like to initialize ${chalk.yellow('dep')} to manage dependencies?`,
+        default: false,
+        store: true
+      });
+    }
+
+    return this.prompt(prompts).then(({app, goPkg}) => {
       this.appName = app;
+      this.goPkg = goPkg;
       cb();
     })
   }
@@ -81,7 +92,9 @@ class GolangGenerator extends Generator {
     });
 
     // setup project
-    this.spawnCommandSync("dep", ["init"], {cwd: this.destinationRoot()})
+    if (this.goPkg) {
+      spawnDep(["init"])
+    }
   }
 
 }
