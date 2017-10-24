@@ -4,6 +4,10 @@ export default [
     to: '.gitignore'
   },
   {
+    from: '_travis.yml',
+    to: '.travis.yml'
+  },
+  {
     from: '_editorconfig',
     to: '.editorconfig'
   },
