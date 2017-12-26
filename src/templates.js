@@ -1,4 +1,4 @@
-export default [
+export const init = [
   {
     from: '_gitignore',
     to: '.gitignore'
@@ -20,10 +20,6 @@ export default [
     to: 'Dockerfile'
   },
   {
-    from: '_main.go',
-    to: 'main.go'
-  },
-  {
     from: '_version.go',
     to: 'version.go'
   },
@@ -36,10 +32,6 @@ export default [
     to: 'README.md'
   },
   {
-    from: '_LICENSE',
-    to: 'LICENSE'
-  },
-  {
     from: '_vscode/_settings.json',
     to: '.vscode/settings.json'
   },
@@ -47,4 +39,15 @@ export default [
     from: '_vscode/_launch.json',
     to: '.vscode/launch.json'
   }
-];
+]
+
+export const defaults = [
+  {
+    from: '_LICENSE',
+    to: 'LICENSE'
+  },
+  {
+    from: '_main.go',
+    to: 'main.go'
+  },
+]

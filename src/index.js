@@ -3,10 +3,14 @@ import proc from 'process'
 import path from 'path'
 import chalk from 'chalk'
 import Generator from 'yeoman-generator'
-import { spawnDep } from './helpers'
+import ora from 'ora'
+import spawnAsync from '@expo/spawn-async'
 
 // load configs
-import templates from './templates'
+import { init, defaults } from './templates'
+
+// spinner
+let spinner = ora('Configuring (this may can take several minutes) ...')
 
 // generator
 class GolangGenerator extends Generator {
@@ -28,14 +32,14 @@ class GolangGenerator extends Generator {
   // we use a property, because this is executed first
   get initializing() {
 
-      function hello() {
-        // say yo, to any new gopher
-        this.log(yosay(`Greetings Gopher! Let's get you started with your next great project.`))
-      }
+    function hello() {
+      // say yo, to any new gopher
+      this.log(yosay(`${chalk.blue('Greetings Gopher!')} Let's get your next project started.`))
+    }
 
-      return {
-        hello
-      }
+    return {
+      hello
+    }
   }
 
   // set necessary paths
@@ -65,31 +69,77 @@ class GolangGenerator extends Generator {
       }
     ]
 
-    if (spawnDep(["--help"])) { // test `dep` is installed
+    // if `dep` is available
+    if (!!this.spawnCommandSync('dep', ['--help'], { stdio: false }).status) { // test `dep` is installed
       prompts.push({
         type: 'confirm',
-        name: 'goPkg',
-        message: `Would you like to initialize ${chalk.yellow('dep')}?`,
+        name: 'dep',
+        message: `Would you like to run ${chalk.yellow(`dep init`)}?`,
         default: true,
         store: true
       })
     }
 
-    return this.prompt(prompts).then(({app, goPkg, vendor}) => {
+    // if `cobra` is available
+    if (this.spawnCommandSync('cobra', ['--help'], { stdio: false }).output !== null) { // test `dep` is installed
+      prompts.push({
+        type: 'confirm',
+        name: 'cobra',
+        message: `Would you like to run ${chalk.yellow(`cobra init`)}?`,
+        default: false,
+        store: true
+      })
+    }
+
+    return this.prompt(prompts).then(({ app, dep, vendor, cobra }) => {
       this.appName = app
-      this.goPkg = goPkg
+      this.dep = dep
       this.vendor = vendor
+      this.cobra = cobra
       cb()
     })
   }
 
   // just in case
-  configuring() { return }
+  async configuring() {
+    // start spinner
+    spinner.start()
+
+    // run `cobra init`
+    if (this.cobra) {
+      // run cobra init
+      let result = spawnAsync('cobra', ['init', '-l', 'MIT'], { stdio: false })
+      try {
+        await result
+      } catch (e) {
+        spinner.fail([`Could not initialize ${chalk.red('cobra')}`])
+        this.env.error(e)
+      }
+    }
+
+    // run `dep init`
+    if (this.dep) {
+      // run dep init
+      let result = spawnAsync('dep', ['init'], { stdio: false })
+      try {
+        await result
+      } catch (e) {
+        spinner.fail([`Could not initialize ${chalk.red('dep')}`])
+        this.env.error(e)
+      }
+    }
+
+    spinner.succeed('Configured')
+  }
 
   // writing our files
-  writing() {
-    // log
-    this.log(`Coyping templates ...`)
+  async writing() {
+    // templates
+    const templates = init
+
+    if (this.cobra === false) {
+      templates.concat(defaults)
+    }
 
     // parse templates
     templates.forEach(template => {
@@ -100,11 +150,10 @@ class GolangGenerator extends Generator {
       )
     })
 
-    // setup project
-    if (this.goPkg) {
-      spawnDep(["init"])
-    }
+    return
   }
+
+  end() { return }
 
 }
 
