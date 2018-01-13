@@ -14,22 +14,17 @@
     "prototypejs": false, // prototypejs global variables.
     "shelljs": false, // shelljs global variables.
   },
-  "globals": {
-    // e.g. "angular": true
-  },
+  "globals": {},
   "plugins": [
-    // e.g. "react" (must run `npm install eslint-plugin-react` first)
     "prettier"
   ],
   "rules": {
     "prettier/prettier": [
       "error",
       {
-        "singleQuote": true
+        "singleQuote": true,
+        "semi": false
       }
-    ],
-    "semi": [
-      "never"
     ]
   }
 }

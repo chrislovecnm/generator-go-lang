@@ -59,9 +59,11 @@
   "scripts": {
     "babel": "babel",
     "build": "babel src -d app",
+    "ci": "npm run lint && npm run test",
+    "lint": "eslint --fix src/**/*.js",
     "watch": "babel --watch src -d app",
     "prepublish": "npm run build",
-    "test": "eslint 'src/**/*.js' && jest",
+    "test": "jest",
     "update": "git pull --recurse-submodules"
   },
   "jest": {

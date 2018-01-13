@@ -49,5 +49,5 @@ export const defaults = [
   {
     from: '_main.go',
     to: 'main.go'
-  },
+  }
 ]

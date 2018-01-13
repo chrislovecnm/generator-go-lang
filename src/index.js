@@ -14,7 +14,6 @@ let spinner = ora('Configuring (this may can take several minutes) ...')
 
 // generator
 class GolangGenerator extends Generator {
-
   constructor(args, options) {
     super(args, options)
 
@@ -23,7 +22,7 @@ class GolangGenerator extends Generator {
       desc: `The name of the application (e.g. 'hello-world')`,
       type: String,
       optional: true,
-      default: path.basename(proc.cwd()),
+      default: path.basename(proc.cwd())
     })
 
     this.appName = this.appname
@@ -31,10 +30,15 @@ class GolangGenerator extends Generator {
 
   // we use a property, because this is executed first
   get initializing() {
-
     function hello() {
       // say yo, to any new gopher
-      this.log(yosay(`${chalk.blue('Greetings Gopher!')} Let's get your next project started.`))
+      this.log(
+        yosay(
+          `${chalk.blue(
+            'Greetings Gopher!'
+          )} Let's get your next project started.`
+        )
+      )
     }
 
     return {
@@ -50,7 +54,6 @@ class GolangGenerator extends Generator {
 
   // prompting the user for inputs
   prompting() {
-
     const cb = this.async()
 
     const prompts = [
@@ -59,8 +62,9 @@ class GolangGenerator extends Generator {
         name: 'app',
         message: `What is the name of your new app?`,
         default: this.appName,
-        store: true,
-      }, {
+        store: true
+      },
+      {
         type: 'confirm',
         name: 'vendor',
         message: `Would you like to commit ${chalk.yellow('vendor')}?`,
@@ -70,7 +74,8 @@ class GolangGenerator extends Generator {
     ]
 
     // if `dep` is available
-    if (!!this.spawnCommandSync('dep', ['--help'], { stdio: false }).status) { // test `dep` is installed
+    if (!!this.spawnCommandSync('dep', ['--help'], { stdio: false }).status) {
+      // test `dep` is installed
       prompts.push({
         type: 'confirm',
         name: 'dep',
@@ -81,7 +86,11 @@ class GolangGenerator extends Generator {
     }
 
     // if `cobra` is available
-    if (this.spawnCommandSync('cobra', ['--help'], { stdio: false }).output !== null) { // test `dep` is installed
+    if (
+      this.spawnCommandSync('cobra', ['--help'], { stdio: false }).output !==
+      null
+    ) {
+      // test `dep` is installed
       prompts.push({
         type: 'confirm',
         name: 'cobra',
@@ -153,8 +162,9 @@ class GolangGenerator extends Generator {
     return
   }
 
-  end() { return }
-
+  end() {
+    return
+  }
 }
 
 // exporting generator as CommonJS module
