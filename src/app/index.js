@@ -25,7 +25,9 @@ class GolangGenerator extends Generator {
       default: path.basename(proc.cwd())
     })
 
-    this.appName = this.appname
+    this.appName = this.options.appname
+
+    console.log(this.appName)
   }
 
   // we use a property, because this is executed first
