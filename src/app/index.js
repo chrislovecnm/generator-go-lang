@@ -10,7 +10,7 @@ import spawnAsync from '@expo/spawn-async'
 import { init, defaults } from './templates'
 
 // spinner
-let spinner = ora('Configuring (this may can take several minutes) ...')
+const spinner = ora('Configuring (this may can take several minutes) ...')
 
 // generator
 class GolangGenerator extends Generator {
@@ -117,9 +117,11 @@ class GolangGenerator extends Generator {
     // run `cobra init`
     if (this.cobra) {
       // run cobra init
-      let result = spawnAsync('cobra', ['init', '-l', 'MIT'], { stdio: false })
+      let result
       try {
-        await result
+        result = await spawnAsync('cobra', ['init', '-l', 'MIT'], {
+          stdio: false
+        })
       } catch (e) {
         spinner.fail([`Could not initialize ${chalk.red('cobra')}`])
         this.env.error(e)
@@ -129,9 +131,9 @@ class GolangGenerator extends Generator {
     // run `dep init`
     if (this.dep) {
       // run dep init
-      let result = spawnAsync('dep', ['init'], { stdio: false })
+      let result
       try {
-        await result
+        result = await spawnAsync('dep', ['init'], { stdio: false })
       } catch (e) {
         spinner.fail([`Could not initialize ${chalk.red('dep')}`])
         this.env.error(e)
