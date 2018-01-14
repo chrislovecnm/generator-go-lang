@@ -10,7 +10,7 @@ describe('run generator', () => {
   test('generating', async () => {
     try {
       await helpers
-        .run(path.join(__dirname, '../app'))
+        .run(path.join(__dirname, '../generators/app'))
         .withArguments([])
         .withPrompts({
           appName: 'test',
