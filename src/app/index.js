@@ -49,7 +49,7 @@ class GolangGenerator extends Generator {
   // set necessary paths
   paths() {
     // set new source path
-    this.sourceRoot(path.resolve(this.sourceRoot(), '../../../templates/'))
+    this.sourceRoot(path.resolve(__filename, '../../../templates/'))
   }
 
   // prompting the user for inputs
