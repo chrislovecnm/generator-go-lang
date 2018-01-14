@@ -26,8 +26,6 @@ class GolangGenerator extends Generator {
     })
 
     this.appName = this.options.appname
-
-    console.log(this.appName)
   }
 
   // we use a property, because this is executed first
