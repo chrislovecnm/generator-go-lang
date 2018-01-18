@@ -149,7 +149,7 @@ class GolangGenerator extends Generator {
     const templates = init
 
     if (this.cobra === false) {
-      templates.concat(defaults)
+      templates.push(...defaults)
     }
 
     // parse templates
