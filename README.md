@@ -11,31 +11,42 @@
 
 > We highly recommand to use `nvm` ([NVM](https://github.com/creationix/nvm)) to manage your Node versions, and to use the most recent versions
 
-> if you have [dep](https://github.com/golang/dep) for Go package management installed, the generator provides you with an option for that to initialize
+> If you have [dep](https://github.com/golang/dep) for Go package management installed, the generator provides you with an option for that to initialize
+
+> We use [Gazelle](https://github.com/bazelbuild/bazel-gazelle) as underlying [Bazel](https://github.com/bazelbuild) generator
+> Also we use [dep](https://github.com/golang/dep) as vendoring tools with [Bazel](https://github.com/bazelbuild)
 
 First, you have to install `yo`, as to use any [Yeoman](http://yeoman.io/) Generator. 
 
-```
+```bash
 npm i -g generator-go-lang
 ```
 
-Create your project in the `$GOPATH`.
+Create your project folder your `$GOPATH`. This is recommended in use with [dep](https://github.com/golang/dep).
 
-```
-mkdir $GOPATH/src/<username>/your-new_app && cd $_
+```bash
+mkdir $GOPATH/src/<username>/your_new_app && cd $_
 ```
 
-```
+```bash
 gocreate
+```
+> You could also `npm i -g yo` and use `yo go-lang`
+
+```bash
+bazel run //:gazelle
+bazel run //:your_new_app
 ```
 
 Have fun!
 
-> You could also `npm i -g yo` and use `yo go-lang`
-
 ## Development
 
 We can highly recommend to consult the Yeoman Guide to [write your own Yeoman Generator](http://yeoman.io/authoring/). Most importantly, to use the generator locally, you have to `npm link` the generator.
+
+```bash
+npm run watch
+```
 
 ## License
 [MIT](/LICENSE)

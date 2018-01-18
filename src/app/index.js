@@ -65,6 +65,12 @@ class GolangGenerator extends Generator {
         store: true
       },
       {
+        type: 'input',
+        name: 'importPath',
+        message: `What is the import path our your project?`,
+        store: true
+      },
+      {
         type: 'confirm',
         name: 'vendor',
         message: `Would you like to commit ${chalk.yellow('vendor')}?`,
@@ -100,13 +106,16 @@ class GolangGenerator extends Generator {
       })
     }
 
-    return this.prompt(prompts).then(({ app, dep, vendor, cobra }) => {
-      this.appName = app
-      this.dep = dep
-      this.vendor = vendor
-      this.cobra = cobra
-      cb()
-    })
+    return this.prompt(prompts).then(
+      ({ app, dep, importPath, vendor, cobra }) => {
+        this.appName = app
+        this.importPath = importPath
+        this.dep = dep
+        this.vendor = vendor
+        this.cobra = cobra
+        cb()
+      }
+    )
   }
 
   // just in case

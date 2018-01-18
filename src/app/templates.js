@@ -12,10 +12,6 @@ export const init = [
     to: '.editorconfig'
   },
   {
-    from: '_Makefile',
-    to: 'Makefile'
-  },
-  {
     from: '_Dockerfile',
     to: 'Dockerfile'
   },
@@ -38,6 +34,14 @@ export const init = [
   {
     from: '_vscode/_launch.json',
     to: '.vscode/launch.json'
+  },
+  {
+    from: '_BUILD',
+    to: 'BUILD'
+  },
+  {
+    from: '_WORKSPACE',
+    to: 'WORKSPACE'
   }
 ]
 
